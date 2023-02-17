@@ -23,14 +23,13 @@ const Doctors = () => {
     <div>
       <Navbar />
 
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 p-12">
         {doctors?.map((doctor) => (
-          <div class="flex justify-center mt-4 ml-5 col-span-4">
-            <div class="rounded-lg shadow-lg bg-white max-w-sm">
+            <div class="rounded-lg shadow-lg bg-white m-3 col-span-4">
               <a href="#!">
-                <img class="rounded-t-lg" src="/Images/cardd.jpeg" alt="" />
+                <img class="rounded-t-lg w-full object-cover" src="/Images/cardd.jpeg" alt="" />
               </a>
-              <div class="p-6">
+              <div class="p-6 ">
                 <h5 class="text-gray-900 text-xl font-medium mb-2">
                   {doctor.doctorName}
                 </h5>
@@ -45,7 +44,6 @@ const Doctors = () => {
                 </p>
      
               </div>
-            </div>
           </div>
         ))}
       </div>

@@ -1,44 +1,50 @@
 import * as React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Navbar from "../navbar";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import Stack from "@mui/material/Stack";
-import dayjs from "dayjs";
+import axios from "axios";
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+// const phoneRegExp =
+//   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
+const AppointmentSchema = yup.object().shape({
+  name: yup.string().required("required"),
+  // lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
+  // contact: yup
+  //   .string()
+  //   .matches(phoneRegExp, "Phone number is not valid")
+  //   .required("required"),
+  // address1: yup.string().required("required"),
+  // address2: yup.string().required("required"),
 });
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
-};
 
 const Booking = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [value, setValue] = React.useState(dayjs("2018-01-01T00:00:00.000Z"));
+  const initialValues = {
+    name: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    date: "",
+    time: "",
+  };
 
-  const handleFormSubmit = (values) => {};
+  const handleFormSubmit = (values) => {
+    console.log(values, "1234567890");
+    axios.post(`${process.env.REACT_APP_PORT}/addAppointment`, values);
+  };
 
   return (
     <Box>
@@ -53,7 +59,7 @@ const Booking = () => {
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
-          validationSchema={checkoutSchema}
+          validationSchema={AppointmentSchema}
         >
           {({
             values,
@@ -79,10 +85,10 @@ const Booking = () => {
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
-                  name="firstName"
-                  error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
+                  value={values.name}
+                  name="name"
+                  error={!!touched.name && !!errors.name}
+                  helperText={touched.name && errors.name}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -118,30 +124,56 @@ const Booking = () => {
                   label="Contact Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.contact}
-                  name="contact"
-                  error={!!touched.contact && !!errors.contact}
-                  helperText={touched.contact && errors.contact}
+                  value={values.phoneNumber}
+                  name="phoneNumber"
+                  error={!!touched.phoneNumber && !!errors.phoneNumber}
+                  helperText={touched.phoneNumber && errors.phoneNumber}
                   sx={{ gridColumn: "span 4" }}
                 />
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Stack
-                    spacing={3}
-                    sx={{
-                      gridColumn: "span 4",
-                    }}
+                <FormControl
+                  required
+                  variant="filled"
+                  sx={{ gridColumn: "span 4" }}
+                >
+                  <InputLabel id="demo-simple-select-required-label">
+                    Time Schedule
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-required-label"
+                    id="demo-simple-select-required"
+                    value={values?.time}
+                    label="Time Schedule"
+                    name="time"
+                    defaultValue=""
+                    onBlur={handleBlur}
+                    error={!!touched.time && !!errors.time}
+                    helperText={touched.time && errors.time}
+                    onChange={handleChange}
                   >
-                    <DateTimePicker
-                      label=""
-                      renderInput={(params) => <TextField {...params} />}
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                    />
-                  </Stack>
-                </LocalizationProvider>
+                    <MenuItem value="09:30 AM - 12:30 PM">
+                      09:30 AM - 12:30 PM
+                    </MenuItem>
+                    <MenuItem value="12:30 AM - 03:30 PM">
+                      12:30 AM - 03:30 PM
+                    </MenuItem>
+                    <MenuItem value="03:30 AM - 7:30 PM">
+                      03:30 AM - 7:30 PM
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  type="date"
+                  label="Date"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.date}
+                  name="date"
+                  error={!!touched.date && !!errors.date}
+                  helperText={touched.date && errors.date}
+                  sx={{ gridColumn: "span 4" }}
+                />
               </Box>
               <Box justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
