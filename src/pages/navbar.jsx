@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Logout"];
 
 function Navbar() {
   const navigate = useNavigate;
@@ -91,7 +91,7 @@ function Navbar() {
                 <Link to="/appoinment">
                   <Typography textAlign="center">Appointment</Typography>
                 </Link>
-                <Link to="/">
+                <Link to="/doctors">
                   <Typography textAlign="center">Doctors</Typography>
                 </Link>
                 <Link to="">
@@ -128,12 +128,12 @@ function Navbar() {
                 Appointment
               </Button>
             </Link>
-            <Link to="/dateTime">
+            <Link to="/doctors">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Doctors
               </Button>
             </Link>
-            <Link to="">
+            <Link to="/treatments">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Treatments
               </Button>

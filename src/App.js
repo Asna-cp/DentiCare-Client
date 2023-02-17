@@ -5,6 +5,8 @@ import "./App.css";
 import HomePage from './pages/Homepage/HomePage';
 import Register from "./pages/Register";
 import Booking from './pages/Booking/booking';
+import Doctors from './pages/Doctors/doctors';
+import Treatments from './pages/Treatments/treatments'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/appoinment' element={<Booking/>} />
+          <Route path='/doctors' element={<Doctors/>} />
+          <Route path='/treatments' element={<Treatments/>} />
         </Routes>
       </BrowserRouter>
     </>

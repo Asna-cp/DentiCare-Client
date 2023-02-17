@@ -3,6 +3,7 @@ import Navbar from "../navbar";
 import Banner from "./banner";
 import Testimonial from "./testimonial";
 import Cards from "./cards";
+
 const HomePage = () => {
   return (
     <>
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Banner />
       <Cards />
       <Testimonial />
+   
     </>
   );
 };
