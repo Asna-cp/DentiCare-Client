@@ -1,5 +1,4 @@
 import React from "react";
-
 const testimonial = () => {
   return (
     <div>
@@ -10,10 +9,10 @@ const testimonial = () => {
           <div class="grid md:grid-cols-3 gap-x-6 lg:gap-x-12">
             <div class="mb-12 md:mb-0">
               <div class="flex justify-center mb-6">
-                <img
+                {/* <img
                   src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg"
                   class="rounded-full shadow-lg w-32"
-                />
+                /> */}
               </div>
               <h5 class="text-lg font-bold mb-4">Maria Smantha</h5>
               <h6 class="font-medium text-blue-600 mb-4">Web Developer</h6>

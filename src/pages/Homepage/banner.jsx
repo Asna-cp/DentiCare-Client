@@ -1,5 +1,4 @@
 import React from "react";
-
 function banner() {
   return (
     <div

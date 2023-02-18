@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -16,11 +14,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+
 const theme = createTheme();
 const initialValues = {
   name: "",
   email: "",
   password: "",
+  confirmpassword:"",
 };
 const userSchema = yup.object().shape({
   name: yup
@@ -31,7 +31,7 @@ const userSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 character")
+    .min(6, "Minimum eight characters, at least one letter and one number:")
     .required("required"),
 });
 const Register = () => {
@@ -138,13 +138,20 @@ const Register = () => {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox value="allowExtraEmails" color="primary" />
-                        }
-                        label="Confirm password."
+                      <TextField
+                        fullWidth
+                        name="confirmpassword"
+                        label="Confirm Password"
+                        type="password"
+                        id="confirmpassword"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.confirmpassword}
+                        error={!!touched.confirmpassword && !!errors.confirmpassword}
+                        helperText={touched.confirmpassword && errors.confirmpassword}
                       />
                     </Grid>
+                   
                   </Grid>
                   <Button
                     type="submit"

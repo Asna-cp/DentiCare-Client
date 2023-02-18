@@ -11,7 +11,6 @@ const HomePage = () => {
       <Banner />
       <Cards />
       <Testimonial />
-   
     </>
   );
 };

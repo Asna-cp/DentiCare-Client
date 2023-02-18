@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 const Treatments = () => {
   const [treatments, setTreatments] = useState([]);
-
   async function viewTreatments() {
     axios
       .get("http://localhost:8080/api/v1/user/alltreatments")
@@ -13,7 +12,6 @@ const Treatments = () => {
         setTreatments(response?.data);
       });
   }
-
   useEffect(() => {
     viewTreatments();
   }, []);
@@ -32,17 +30,12 @@ const Treatments = () => {
               />
               <div class="p-6 flex flex-col justify-start overflow-y-auto">
                 <h5 class="text-gray-900 text-xl font-medium mb-2">
-                {treatment.treatmentname}
+                  {treatment.treatmentname}
                 </h5>
                 <p class="text-gray-700 text-base mb-4">
                   {treatment.discription}
-                  
                 </p>
-                <p class="text-gray-700 text-base mb-4">
-                  {treatment.about}
-                  
-                </p>
-             
+                <p class="text-gray-700 text-base mb-4">{treatment.about}</p>
               </div>
             </div>
           </div>
