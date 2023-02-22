@@ -7,14 +7,12 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
-
-const settings = ["Profile", "Account", "Logout"];
 
 function Navbar() {
   const navigate = useNavigate;
@@ -36,6 +34,8 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const user = localStorage.getItem("user");
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "grey" }}>
@@ -88,7 +88,7 @@ function Navbar() {
               }}
             >
               <MenuItem>
-                <Link to="/appoinment">
+                <Link to="/appointment">
                   <Typography textAlign="center">Appointment</Typography>
                 </Link>
                 <Link to="/doctors">
@@ -123,7 +123,7 @@ function Navbar() {
             DentiCare
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link to="/appoinment">
+            <Link to="/appointment">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Appointment
               </Button>
@@ -143,7 +143,10 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <AccountCircleOutlinedIcon
+                  sx={{ width: "30px", height: "30px" , color:"white"}}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -162,11 +165,21 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "10rem",
+                }}
+                onClick={handleCloseUserMenu}
+              >
+                <Typography sx={{ mb: "5px" }} textAlign="center">
+                  {user}
+                </Typography>
+                <Typography sx={{ mt: "5px" }} textAlign="center">
+                  Log Out
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

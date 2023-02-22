@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 
 const Treatments = () => {
   const [treatments, setTreatments] = useState([]);
+  
   async function viewTreatments() {
     axios
-      .get("http://localhost:8080/api/v1/user/alltreatments")
+      .get(`${process.env.REACT_APP_PORT}/alltreatments`)
       .then((response) => {
         setTreatments(response?.data);
       });

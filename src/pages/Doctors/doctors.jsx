@@ -9,7 +9,7 @@ const Doctors = () => {
 
   async function getDoctors() {
     axios
-      .get("http://localhost:8080/api/v1/user/alldoctors")
+      .get(`${process.env.REACT_APP_PORT}/alldoctors`)
       .then((response) => {
         setDoctors(response?.data);
       });
