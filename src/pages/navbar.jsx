@@ -15,11 +15,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate;
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,7 +32,24 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  //GET USER DATAILS FROM LOCAL STORAGE
   const user = localStorage.getItem("user");
+
+  const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
+
+  //LOGOUT
+
+  let logout = () => {
+    localStorage.clear();
+    navigate("/login");
+    window.location.reload();
+  };
+
+  let login = () => {
+    navigate("/login");
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "grey" }}>
@@ -100,6 +114,9 @@ function Navbar() {
                 <Link to="">
                   <Typography textAlign="center">Contact</Typography>
                 </Link>
+                <Link to="/profile">
+                  <Typography textAlign="center">Profile</Typography>
+                </Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -138,6 +155,11 @@ function Navbar() {
                 Treatments
               </Button>
             </Link>
+            <Link to="/profile">
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Profile
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -145,42 +167,83 @@ function Navbar() {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                 <AccountCircleOutlinedIcon
-                  sx={{ width: "30px", height: "30px" , color:"white"}}
+                  sx={{ width: "30px", height: "30px", color: "white" }}
                 />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "10rem",
+            {token ? (
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
                 }}
-                onClick={handleCloseUserMenu}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                <Typography sx={{ mb: "5px" }} textAlign="center">
-                  {user}
-                </Typography>
-                <Typography sx={{ mt: "5px" }} textAlign="center">
-                  Log Out
-                </Typography>
-              </MenuItem>
-            </Menu>
+                <MenuItem
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "10rem",
+                  }}
+                  onClick={handleCloseUserMenu}
+                >
+                  <Typography sx={{ mb: "5px" }} textAlign="center">
+                    {user}
+                  </Typography>
+                  <Typography
+                    sx={{ mt: "5px" }}
+                    onClick={logout}
+                    textAlign="center"
+                  >
+                    Log Out
+               
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            ) : (
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "10rem",
+                  }}
+                  onClick={handleCloseUserMenu}
+                >
+                  <Typography
+                    sx={{ mt: "5px" }}
+                    onClick={login}
+                    textAlign="center"
+                  >
+                    Log In
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            )}
           </Box>
         </Toolbar>
       </Container>

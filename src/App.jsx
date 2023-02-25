@@ -7,10 +7,10 @@ import Register from "./pages/Register";
 import Booking from "./pages/Booking/booking";
 import Doctors from "./pages/Doctors/doctors";
 import Treatments from "./pages/Treatments/treatments";
+import Profile from "./pages/Profile/profile";
 
 function App() {
   const token = localStorage.getItem("token");
-  console.log(token,'234567890-');
   return (
     <>
       <BrowserRouter>
@@ -21,6 +21,7 @@ function App() {
           {token && <Route path="/appointment" element={<Booking />} />}
           {token && <Route path="/doctors" element={<Doctors />} />}
           {token && <Route path="/treatments" element={<Treatments />} />}
+          {token && <Route path="/profile" element={<Profile/>} />}
         </Routes>
       </BrowserRouter>
     </>

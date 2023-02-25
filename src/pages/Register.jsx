@@ -3,26 +3,42 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { userSchema } from "../Validation/userValidation";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phonenum, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   async function registerUser(event) {
     event.preventDefault();
-    try {
-      await axios.post(`${process.env.REACT_APP_PORT}/register`, {
-        name,
-        email,
-        password,
-      });
-      alert("Registration Successful");
-      navigate("/login");
-    } catch (e) {
-      alert("Registration Failed");
+
+    let formData = {
+      name: name,
+      email: email,
+      phonenum: phonenum,
+      password: password,
+    };
+    const isValid = await userSchema.isValid(formData);
+    console.log(isValid);
+    if (isValid === true) {
+      try {
+        await axios.post(`${process.env.REACT_APP_PORT}/register`, {
+          name,
+          email,
+          phonenum,
+          password,
+        });
+        alert("Registration Successful");
+        navigate("/login");
+      } catch (e) {
+        alert("Registration Failed");
+      }
+    } else {
+      alert("error");
     }
   }
   return (
@@ -39,7 +55,11 @@ const Register = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create and account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={registerUser}>
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={registerUser}
+                validationSchema={userSchema}
+              >
                 <div>
                   <label
                     for="name"
@@ -74,6 +94,27 @@ const Register = () => {
                     placeholder="your@gmail.com"
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
+                    className="bg-gray-50 border border-gray-300
+                        text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
+                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                          dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                  />
+                </div>
+                <div>
+                  <label
+                    for="phonenum"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="number"
+                    name="phonenum"
+                    id="phonenum"
+                    placeholder="number"
+                    value={phonenum}
+                    onChange={(e) => setNumber(e.target.value)}
                     className="bg-gray-50 border border-gray-300
                         text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
                          dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white

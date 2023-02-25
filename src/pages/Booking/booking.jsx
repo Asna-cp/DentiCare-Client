@@ -43,6 +43,7 @@ const Booking = () => {
 
   const handleFormSubmit = (values) => {
     axios.post(`${process.env.REACT_APP_PORT}/addAppointment`, values);
+    window.location.reload();
   };
 
   return (

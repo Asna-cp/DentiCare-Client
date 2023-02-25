@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +32,7 @@ const Login = () => {
         if (result.status) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("user", result.userName);
-    
+
           navigate("/");
         } else {
           setErrmessage(result.error);
@@ -41,26 +40,6 @@ const Login = () => {
       })
       .catch(() => setErrmessage("Server not found"));
   };
-  //       email,
-  //       password,
-  //   try {
-  //     const { data } = await axios.post(`${process.env.REACT_APP_PORT}/login`, {
-  //       email,
-  //       password,
-  //     });
-  //     setUser(data);
-  //     localStorage.setItem('token',JSON.stringify(data.token))
-  //     alert("Login Successful");
-  //     setRedirect(true);
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert("Login Failed");
-  //   }
-  // };
-
-  // if (redirect) {
-  //   return <Navigate to={"/"} />;
-
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
