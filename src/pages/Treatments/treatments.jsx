@@ -34,7 +34,7 @@ const Treatments = () => {
                   {treatment.treatmentname}
                 </h5>
                 <p class="text-gray-700 text-base mb-4">
-                  {treatment.discription}
+                  {treatment.description}
                 </p>
                 <p class="text-gray-700 text-base mb-4">{treatment.about}</p>
               </div>

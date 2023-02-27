@@ -24,7 +24,7 @@ const Doctors = () => {
             <a href="#!">
               <img
                 class="rounded-t-lg w-full object-cover"
-                src="/Images/cardd.jpeg"
+                src={doctor.image}
                 alt=""
               />
             </a>
@@ -33,8 +33,8 @@ const Doctors = () => {
                 {doctor.doctorName}
               </h5>
               <p class="text-gray-700 text-base mb-4">{doctor.specialist}</p>
-              <p class="text-gray-700 text-base mb-4">{doctor.discription}</p>
-              <p class="text-gray-700 text-base mb-4">{doctor.discription}</p>
+              <p class="text-gray-700 text-base mb-4">{doctor.description}</p>
+              <p class="text-gray-700 text-base mb-4">{doctor.description}</p>
             </div>
           </div>
         ))}

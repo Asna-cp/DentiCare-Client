@@ -28,7 +28,6 @@ const Login = () => {
       .post(`${process.env.REACT_APP_PORT}/login`, { email, password })
       .then((response) => {
         const result = response.data;
-        console.log(result);
         if (result.status) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("user", result.userName);
