@@ -26,7 +26,7 @@ const Treatments = () => {
             <div class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg h-72">
               <img
                 class=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="/Images/pediatric.jpg"
+                src={treatment.image}
                 alt=""
               />
               <div class="p-6 flex flex-col justify-start overflow-y-auto">

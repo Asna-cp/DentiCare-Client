@@ -8,12 +8,12 @@ import Booking from "./pages/Booking/booking";
 import Doctors from "./pages/Doctors/doctors";
 import Treatments from "./pages/Treatments/treatments";
 import Profile from "./pages/Profile/profile";
-
 function App() {
   const token = localStorage.getItem("token");
   return (
     <>
       <BrowserRouter>
+   
         <Routes>
           <Route path="/" element={<HomePage />} />
           {!token && <Route path="/register" element={<Register />} />}
