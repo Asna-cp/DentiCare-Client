@@ -1,4 +1,6 @@
 import * as React from "react";
+import Footer from "../footer";
+
 import {
   Box,
   Button,
@@ -13,12 +15,14 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Navbar from "../navbar";
 import axios from "axios";
+import { useState } from "react";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 // const phoneRegExp =
 //   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const AppointmentSchema = yup.object().shape({
-  name: yup.string().required("required"),
+  firstName: yup.string().required("required"),
   // lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   // contact: yup
@@ -32,8 +36,17 @@ const AppointmentSchema = yup.object().shape({
 const Booking = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  //PAYPAL FOR PAYMENT
+  const [isPaypal, setIsPaypal] = useState(false);
+  const [formData, setFormData] = useState({});
   const initialValues = {
-    name: "",
+    firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
@@ -42,8 +55,27 @@ const Booking = () => {
   };
 
   const handleFormSubmit = (values) => {
-    axios.post(`${process.env.REACT_APP_PORT}/addAppointment`, values);
+    const formValue = values;
+    setFormData(formValue);
+    setIsPaypal(true);
+  };
+
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: 500,
+          },
+        },
+      ],
+    });
+  };
+  const onApprove = async (data, actions) => {
+    console.log(formData);
+    axios.post(`${process.env.REACT_APP_PORT}/addAppointment`, formData);
     window.location.reload();
+    return actions.order.capture();
   };
 
   return (
@@ -85,10 +117,10 @@ const Booking = () => {
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.name}
-                  name="name"
-                  error={!!touched.name && !!errors.name}
-                  helperText={touched.name && errors.name}
+                  value={values.firstName}
+                  name="firstName"
+                  error={!!touched.firstName && !!errors.firstName}
+                  helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -161,9 +193,10 @@ const Booking = () => {
                     </MenuItem>
                   </Select>
                 </FormControl>
-                <TextField
+                {/* <TextField
                   fullWidth
                   variant="filled"
+                  disablePast={true}
                   type="date"
                   label="Date"
                   onBlur={handleBlur}
@@ -173,18 +206,46 @@ const Booking = () => {
                   error={!!touched.date && !!errors.date}
                   helperText={touched.date && errors.date}
                   sx={{ gridColumn: "span 4" }}
+                /> */}
+
+                <TextField
+                  id="date"
+                  label="Select Date"
+                  type="date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    min: today, // Set minimum date to today's date
+                  }}
                 />
+                
               </Box>
               <Box justifyContent="end" mt="20px">
-                <Button type="submit" color="secondary" variant="contained">
-                  Book Appointment
-                </Button>
+                {isPaypal ? (
+                  <PayPalScriptProvider>
+                    <PayPalButtons
+                      createOrder={(data, actions) =>
+                        createOrder(data, actions)
+                      }
+                      onApprove={(data, actions) => onApprove(data, actions)}
+                    />
+                  </PayPalScriptProvider>
+                ) : (
+                  <Button type="submit" color="secondary" variant="contained">
+                    Book Appointment
+                  </Button>
+                )}
               </Box>
             </form>
           )}
         </Formik>
       </Box>
+      <Footer />
     </Box>
+    
   );
 };
 

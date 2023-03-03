@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../navbar";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Footer from "../footer";
 
 const Treatments = () => {
   const [treatments, setTreatments] = useState([]);
@@ -41,6 +42,9 @@ const Treatments = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Navbar from "../navbar";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import Footer from "../footer";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -38,6 +39,9 @@ const Doctors = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

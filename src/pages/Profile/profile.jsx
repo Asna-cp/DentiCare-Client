@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar";
 import { useEffect } from "react";
+import Footer from "../footer";
 
 const Profile = () => {
   const [user, setUser] = useState("");
@@ -74,6 +75,9 @@ const Profile = () => {
             </form>
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );
