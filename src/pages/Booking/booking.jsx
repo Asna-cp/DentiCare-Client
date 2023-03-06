@@ -87,6 +87,7 @@ const Booking = () => {
         maxWidth="50%"
         margin="auto"
         marginTop="5vh"
+        marginBottom="5vh"
       >
         <Formik
           onSubmit={handleFormSubmit}
@@ -221,7 +222,6 @@ const Booking = () => {
                     min: today, // Set minimum date to today's date
                   }}
                 />
-                
               </Box>
               <Box justifyContent="end" mt="20px">
                 {isPaypal ? (
@@ -245,7 +245,6 @@ const Booking = () => {
       </Box>
       <Footer />
     </Box>
-    
   );
 };
 

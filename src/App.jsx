@@ -8,6 +8,7 @@ import Booking from "./pages/Booking/booking";
 import Doctors from "./pages/Doctors/doctors";
 import Treatments from "./pages/Treatments/treatments";
 import Profile from "./pages/Profile/profile";
+import Details from "./pages/Doctors/doctorDetails"
 function App() {
   const token = localStorage.getItem("token");
   return (
@@ -22,6 +23,7 @@ function App() {
           {token && <Route path="/doctors" element={<Doctors />} />}
           {token && <Route path="/treatments" element={<Treatments />} />}
           {token && <Route path="/profile" element={<Profile/>} />}
+          {token && <Route path="/doctorDetails" element={<Details/>} />}
         </Routes>
       </BrowserRouter>
     </>

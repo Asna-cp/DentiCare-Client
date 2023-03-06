@@ -1,5 +1,20 @@
-import React from "react";
-const testimonial = () => {
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+const Testimonial = () => {
+  const [treatments, setTreatments] = useState([]);
+
+  async function viewTreatments() {
+    axios
+      .get(`${process.env.REACT_APP_PORT}/alltreatments`)
+      .then((response) => {
+        setTreatments(response?.data);
+      });
+  }
+  useEffect(() => {
+    viewTreatments();
+  }, []);
+
   return (
     <div>
       <div class="container my-24 px-6 mx-auto">
@@ -9,13 +24,15 @@ const testimonial = () => {
           <div class="grid md:grid-cols-3 gap-x-6 lg:gap-x-12">
             <div class="mb-12 md:mb-0">
               <div class="flex justify-center mb-6">
-                {/* <img
-                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg"
+                <img
+                  src={treatments?.[0]?.image}
                   class="rounded-full shadow-lg w-32"
-                /> */}
+                />
               </div>
-              <h5 class="text-lg font-bold mb-4">Maria Smantha</h5>
-              <h6 class="font-medium text-blue-600 mb-4">Web Developer</h6>
+              <h5 class="text-lg font-bold mb-4">{treatments.treatmentname}</h5>
+              <h6 class="font-medium text-blue-600 mb-4">
+                {treatments?.[0]?.treatmentname}
+              </h6>
               <p class="mb-4">
                 <svg
                   aria-hidden="true"
@@ -32,9 +49,7 @@ const testimonial = () => {
                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z"
                   ></path>
                 </svg>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                eos id officiis hic tenetur quae quaerat ad velit ab hic
-                tenetur.
+                {treatments?.[0]?.about}
               </p>
               <ul class="flex justify-center mb-0">
                 <li>
@@ -127,12 +142,17 @@ const testimonial = () => {
             <div class="mb-12 md:mb-0">
               <div class="flex justify-center mb-6">
                 <img
-                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(2).jpg"
+                  src={treatments?.[1]?.image}
                   class="rounded-full shadow-lg w-32"
                 />
               </div>
-              <h5 class="text-lg font-bold mb-4">Lisa Cudrow</h5>
-              <h6 class="font-medium text-blue-600 mb-4">Graphic Designer</h6>
+              <h5 class="text-lg font-bold mb-4">
+                {" "}
+                {treatments.treatmentname}
+              </h5>
+              <h6 class="font-medium text-blue-600 mb-4">
+                {treatments?.[1]?.treatmentname}
+              </h6>
               <p class="mb-4">
                 <svg
                   aria-hidden="true"
@@ -149,8 +169,7 @@ const testimonial = () => {
                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z"
                   ></path>
                 </svg>
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                corporis suscipit laboriosam, nisi ut aliquid commodi.
+                {treatments?.[1]?.about}
               </p>
               <ul class="flex justify-center mb-0">
                 <li>
@@ -243,13 +262,13 @@ const testimonial = () => {
             <div class="mb-0">
               <div class="flex justify-center mb-6">
                 <img
-                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                  src={treatments?.[2]?.image}
                   class="rounded-full shadow-lg w-32"
                 />
               </div>
-              <h5 class="text-lg font-bold mb-4">John Smith</h5>
+              <h5 class="text-lg font-bold mb-4">{treatments.treatmentname}</h5>
               <h6 class="font-medium text-blue-600 mb-4">
-                Marketing Specialist
+                {treatments?.[2]?.treatmentname}
               </h6>
               <p class="mb-4">
                 <svg
@@ -267,8 +286,7 @@ const testimonial = () => {
                     d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z"
                   ></path>
                 </svg>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atque corrupti.
+                {treatments?.[2]?.about}
               </p>
               <ul class="flex justify-center mb-0">
                 <li>
@@ -365,4 +383,4 @@ const testimonial = () => {
   );
 };
 
-export default testimonial;
+export default Testimonial;

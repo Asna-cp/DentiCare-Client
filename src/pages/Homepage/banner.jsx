@@ -32,7 +32,7 @@ function banner() {
         <div className="carousel-item active float-left w-full">
           <img
             src="/Images/clinic.jpeg"
-            className="block w-full"
+            className="block w-full h-screen"
             alt="Wild Landscape"
           />
           <div class="carousel-caption hidden md:block absolute text-center">
@@ -41,7 +41,7 @@ function banner() {
           </div>
         </div>
         <div className="carousel-item float-left w-full">
-          <img src="/Images/brush.jpg" className="block w-full" alt="Camera" />
+          <img src="/Images/brush.jpg" className="block w-full h-screen" alt="Camera" />
           <div class="carousel-caption hidden md:block absolute text-center">
             <h5 class="text-xl">First slide label</h5>
             <p>Some representative placeholder content for the first slide.</p>
@@ -50,7 +50,7 @@ function banner() {
         <div className="carousel-item float-left w-full">
           <img
             src="/Images/tooth.jpg"
-            className="block w-full"
+            className="block w-full h-screen"
             alt="Exotic Fruits"
           />
           <div class="carousel-caption hidden md:block absolute text-center">

@@ -1,30 +1,85 @@
 import React from "react";
-const cards = () => {
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+
+const Cards = () => {
+
+  const [doctors, setDoctors] = useState([]);
+
+  async function getDoctors() {
+    axios.get(`${process.env.REACT_APP_PORT}/alldoctors`).then((response) => {
+      setDoctors(response?.data);
+    });
+  }
+  useEffect(() => {
+    getDoctors();
+  }, []);
+  
   return (
     <div>
-      <div class="flex justify-center">
+      <h1 className="text-center font-bold text-4xl mt-5"> Doctors </h1>
+      <div className="flex justify-center">
+        {/* {doctors?.map((doctor) => (  
         <div class="rounded-lg shadow-lg mt-5 bg-white max-w-sm">
           <a href="#!">
-            <img class="rounded-t-lg w-full" src="/Images/card.jpeg" alt="" />
+            <img class="rounded-t-lg w-full"
+             src={doctor.image} 
+             alt="" />
           </a>
           <div class="p-6">
             <h5 class="text-gray-900 text-xl font-medium mb-2">
-              Excellence Defined
+            {doctor.doctorName}
             </h5>
             <p class="text-gray-700 text-base mb-4">
-              Teeth whitening is one of the quickest ways to improve your smile.
-              Many patients are amazed that one trip to DentiCare can change
-              their teeth dramatically.
+            {doctor.specialist} 
             </p>
-            {/* <button
-              type="button"
-              class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase 
-              rounded shadow-md hover:bg-blue-700 hover:shadow-lg
-               focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Button
-            </button> */}
+          </div>
+        </div>
+      ))} */}
+      <div className="rounded-lg shadow-lg mt-5 mx-3 bg-white max-w-sm">
+          <a href="#!">
+            <img className="rounded-t-lg w-full h-44"
+             src={doctors?.[0]?.image} 
+             alt="" />
+          </a>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">
+            {doctors?.[0]?.doctorName}
+            </h5>
+            <p className="text-gray-700 text-base mb-4">
+            {doctors?.[0]?.specialist} 
+            </p>
+          </div>
+        </div>
+        <div className="rounded-lg shadow-lg mt-5 mx-3 bg-white max-w-sm">
+          <a href="#!">
+            <img className="rounded-t-lg w-full h-44"
+             src={doctors?.[1]?.image} 
+             alt="" />
+          </a>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">
+            {doctors?.[1]?.doctorName}
+            </h5>
+            <p className="text-gray-700 text-base mb-4">
+            {doctors?.[1]?.specialist} 
+            </p>
+          </div>
+        </div>
+        <div className="rounded-lg shadow-lg mt-5 mx-3 bg-white max-w-sm">
+          <a href="#!">
+            <img className="rounded-t-lg w-full h-44"
+             src={doctors?.[2]?.image} 
+             alt="" />
+          </a>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">
+            {doctors?.[2]?.doctorName}
+            </h5>
+            <p className="text-gray-700 text-base mb-4">
+            {doctors?.[2]?.specialist} 
+            </p>
           </div>
         </div>
       </div>
@@ -32,4 +87,4 @@ const cards = () => {
   );
 };
 
-export default cards;
+export default Cards;

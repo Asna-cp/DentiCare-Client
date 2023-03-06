@@ -43,7 +43,7 @@ const Treatments = () => {
           </div>
         ))}
       </div>
-      <div>
+      <div className="mt-5">
         <Footer />
       </div>
     </div>

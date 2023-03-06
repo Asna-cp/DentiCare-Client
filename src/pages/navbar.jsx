@@ -69,7 +69,9 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
+            <Link to={"/"}>
             DentiCare
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
