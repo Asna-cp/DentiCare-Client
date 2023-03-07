@@ -20,17 +20,20 @@ const Doctors = () => {
   return (
     <div>
       <Navbar />
-      <div className="grid grid-cols-12 p-12">
+      <Link className="grid grid-cols-12 p-12">
         {doctors?.map((doctor) => (
           <div class="rounded-lg shadow-lg bg-white m-3 col-span-4">
-            <Link to="/doctorDetails">
+            
+              <div>
                 <img
                   class="rounded-t-lg w-full object-cover"
                   src={doctor.image}
                   alt="myimage"
                 />
+
+              </div>
               
-            </Link>
+            
 
             <div class="p-6 ">
               <h5 class="text-gray-900 text-xl font-medium mb-2">
@@ -46,7 +49,7 @@ const Doctors = () => {
             </div>
           </div>
         ))}
-      </div>
+      </Link>
       <div>
         <Footer />
       </div>
