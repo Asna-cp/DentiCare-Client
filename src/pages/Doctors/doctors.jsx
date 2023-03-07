@@ -24,13 +24,13 @@ const Doctors = () => {
         {doctors?.map((doctor) => (
           <div class="rounded-lg shadow-lg bg-white m-3 col-span-4">
             <Link to="/doctorDetails">
-              <div>
+           
                 <img
                   class="rounded-t-lg w-full object-cover"
                   src={doctor.image}
                   alt="myimage"
                 />
-              </div>
+              
             </Link>
 
             <div class="p-6 ">
