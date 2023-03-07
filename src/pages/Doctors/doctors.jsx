@@ -24,7 +24,7 @@ const Doctors = () => {
      {doctors?.map((doctor) => (   
           <div class="rounded-lg shadow-lg bg-white m-3 col-span-4">
 
-            <Link href="/doctorDetails">
+            <Link to ={"/doctorDetails"}>
             <div>
                 <img
                   class="rounded-t-lg w-full object-cover"

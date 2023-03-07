@@ -10,7 +10,7 @@ const Login = () => {
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [password, setPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const [setFormIsValid] = useState(false);
+  // const [setFormIsValid] = useState(false);
   const [setErrmessage] = useState("");
   useEffect(() => {
     setEmailIsValid(email.includes("@"));
@@ -18,9 +18,9 @@ const Login = () => {
   useEffect(() => {
     setPasswordIsValid(password.trim().length > 7);
   }, [password]);
-  useEffect(() => {
-    setFormIsValid(emailIsValid && passwordIsValid);
-  }, [emailIsValid, passwordIsValid]);
+  // useEffect(() => {
+  //   setFormIsValid(emailIsValid && passwordIsValid);
+  // }, [emailIsValid, passwordIsValid]);
 
   const submitHandler = (event) => {
     event.preventDefault();
