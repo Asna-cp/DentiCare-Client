@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import Footer from "../footer";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
