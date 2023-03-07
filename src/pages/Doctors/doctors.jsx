@@ -4,8 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import Footer from "../footer";
-import { Link,Button } from "@mui/material";
-import doctorDetails from "./doctorDetails";
+import { Link} from "@mui/material";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);

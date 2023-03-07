@@ -10,8 +10,8 @@ const Login = () => {
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [password, setPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const [formIsValid, setFormIsValid] = useState(false);
-  const [errMsg, setErrmessage] = useState("");
+  const [setFormIsValid] = useState(false);
+  const [setErrmessage] = useState("");
   useEffect(() => {
     setEmailIsValid(email.includes("@"));
   }, [email]);
@@ -20,7 +20,7 @@ const Login = () => {
   }, [password]);
   useEffect(() => {
     setFormIsValid(emailIsValid && passwordIsValid);
-  }, [emailIsValid, passwordIsValid]);
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
