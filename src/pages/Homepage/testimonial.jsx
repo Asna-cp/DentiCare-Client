@@ -27,6 +27,7 @@ const Testimonial = () => {
                 <img
                   src={treatments?.[0]?.image}
                   class="rounded-full shadow-lg w-32"
+                  alt=""
                 />
               </div>
               <h5 class="text-lg font-bold mb-4">{treatments.treatmentname}</h5>
@@ -144,6 +145,7 @@ const Testimonial = () => {
                 <img
                   src={treatments?.[1]?.image}
                   class="rounded-full shadow-lg w-32"
+                  alt=""
                 />
               </div>
               <h5 class="text-lg font-bold mb-4">
@@ -264,6 +266,7 @@ const Testimonial = () => {
                 <img
                   src={treatments?.[2]?.image}
                   class="rounded-full shadow-lg w-32"
+                  alt=""
                 />
               </div>
               <h5 class="text-lg font-bold mb-4">{treatments.treatmentname}</h5>
