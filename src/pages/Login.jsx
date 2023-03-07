@@ -20,7 +20,7 @@ const Login = () => {
   }, [password]);
   useEffect(() => {
     setFormIsValid(emailIsValid && passwordIsValid);
-  }, []);
+  }, [emailIsValid, passwordIsValid]);
 
   const submitHandler = (event) => {
     event.preventDefault();
