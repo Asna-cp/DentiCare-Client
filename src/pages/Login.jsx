@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,17 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState(true);
+  // const [emailIsValid, setEmailIsValid] = useState(true);
   const [password, setPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState(true);
-  // const [setFormIsValid] = useState(false);
-  const [setErrmessage] = useState("");
-  useEffect(() => {
-    setEmailIsValid(email.includes("@"));
-  }, [email]);
-  useEffect(() => {
-    setPasswordIsValid(password.trim().length > 7);
-  }, [password]);
+  // const [passwordIsValid, setPasswordIsValid] = useState(true);
+  // const [formIsValid, setFormIsValid] = useState(false);
+  // const [errMsg, setErrmessage] = useState("");
+  // useEffect(() => {
+  //   setEmailIsValid(email.includes("@"));
+  // }, [email]);
+  // useEffect(() => {
+  //   setPasswordIsValid(password.trim().length > 7);
+  // }, [password]);
   // useEffect(() => {
   //   setFormIsValid(emailIsValid && passwordIsValid);
   // }, [emailIsValid, passwordIsValid]);
@@ -34,10 +34,10 @@ const Login = () => {
 
           navigate("/");
         } else {
-          setErrmessage(result.error);
+          // setErrmessage(result.error)
         }
       })
-      .catch(() => setErrmessage("Server not found"));
+      // .catch(() => setErrmessage("Server not found"));
   };
   return (
     <div>
