@@ -21,7 +21,7 @@ const Doctors = () => {
     <div>
       <Navbar />
       <Link
-      to= {"/doctorDetails"}
+      to= "/doctorDetails"
       className="grid grid-cols-12 p-12">
         {doctors?.map((doctor) => (
           <div class="rounded-lg shadow-lg bg-white m-3 col-span-4">
