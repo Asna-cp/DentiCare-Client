@@ -36,9 +36,11 @@ const AppointmentSchema = yup.object().shape({
 const Booking = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const [count, setCount] = useState();
+
   const [selectedDate, setSelectedDate] = useState(null);
   const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
-  const handleDateChange = (event) => {
+  const handleChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
@@ -54,10 +56,22 @@ const Booking = () => {
     time: "",
   };
 
-  const handleFormSubmit = (values) => {
-    const formValue = values;
-    setFormData(formValue);
-    setIsPaypal(true);
+  const handleFormSubmit = async (values) => {
+    console.log(values);
+       const { data } = await axios.get(
+      `${process.env.REACT_APP_PORT}/addAppointment?time=${values.time}&date=${values.date}`
+    );
+    setCount(data);
+
+    if (count < 4) {
+
+      const formValue = values;
+      setFormData(formValue);
+
+      setIsPaypal(true);
+    } else {
+      alert("slots fulled ,change your time");
+    }
   };
 
   const createOrder = (data, actions) => {
@@ -72,10 +86,15 @@ const Booking = () => {
     });
   };
   const onApprove = async (data, actions) => {
-    console.log(formData);
     axios.post(`${process.env.REACT_APP_PORT}/addAppointment`, formData);
     window.location.reload();
     return actions.order.capture();
+  };
+
+  //LIMIT FOR APPOINTMENTS
+  const countLimit = async (time) => {
+ 
+    // alert(data);
   };
 
   return (
@@ -183,16 +202,26 @@ const Booking = () => {
                     helperText={touched.time && errors.time}
                     onChange={handleChange}
                   >
-                    <MenuItem value="09:30 AM - 12:30 PM">
+                    <MenuItem
+                      onClick={() => countLimit("09:30 AM - 12:30 PM")}
+                      value="09:30 AM - 12:30 PM"
+                    >
                       09:30 AM - 12:30 PM
                     </MenuItem>
-                    <MenuItem value="12:30 AM - 03:30 PM">
+                    <MenuItem
+                      onClick={() => countLimit("12:30 AM - 03:30 PM")}
+                      value="12:30 AM - 03:30 PM"
+                    >
                       12:30 AM - 03:30 PM
                     </MenuItem>
-                    <MenuItem value="03:30 AM - 7:30 PM">
+                    <MenuItem
+                      onClick={() => countLimit("03:30 AM - 7:30 PM")}
+                      value="03:30 AM - 7:30 PM"
+                    >
                       03:30 AM - 7:30 PM
                     </MenuItem>
                   </Select>
+                  {count > 5 && <p>Slots full</p>}
                 </FormControl>
                 {/* <TextField
                   fullWidth
@@ -213,8 +242,8 @@ const Booking = () => {
                   id="date"
                   label="Select Date"
                   type="date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
+                  value={values.date}
+                  onChange={handleChange}
                   InputLabelProps={{
                     shrink: true,
                   }}
