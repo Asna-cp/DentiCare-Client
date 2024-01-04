@@ -57,7 +57,6 @@ const Booking = () => {
   };
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
        const { data } = await axios.get(
       `${process.env.REACT_APP_PORT}/addAppointment?time=${values.time}&date=${values.date}`
     );
@@ -70,7 +69,7 @@ const Booking = () => {
 
       setIsPaypal(true);
     } else {
-      alert("slots fulled ,change your time");
+      alert("Slots fulled ,change your time");
     }
   };
 
