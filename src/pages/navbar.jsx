@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,10 +13,29 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
+import { Modal, Grid, Radio } from "@mui/material";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "50%",
+  bgcolor: "background.paper",
+  p: 4,
+  maxHeight: "600px",
+};
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [ModalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -69,9 +88,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            <Link to={"/"}>
-            DentiCare
-            </Link>
+            <Link to={"/"}>DentiCare</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -164,6 +181,86 @@ function Navbar() {
             </Link>
           </Box>
 
+          <Box>
+            <Button
+              sx={{ my: 2, color: "white", display: "block" }}
+              onClick={openModal}
+            >
+              About Us
+            </Button>
+          </Box>
+          <Modal
+            open={ModalOpen}
+            onClose={closeModal}
+            aria-labelledby="send-test-email-modal-title"
+            aria-describedby="send-test-email-modal-description"
+          >
+            <Box sx={style}>
+              <IconButton
+                aria-label="Close"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                }}
+                onClick={closeModal}
+              ></IconButton>
+
+              <Typography
+                id="send-test-email-modal-title"
+                variant="h6"
+                component="h2"
+              >
+                Dental Medicine
+              </Typography>
+              <hr style={{ marginTop: "10px" }} />
+
+              <Grid >
+                <ul
+                  style={{
+                    color: "gray",
+                    fontSize: "14px",
+                    marginLeft: "20px",
+                    fontWeight: "lighter",
+                  }}
+                >
+              
+                
+                  <li>
+                    Equipped with state of the art facilities and skilled dental
+                    practitioners, the Dental Department of Manipal Hospitals
+                    provides complete dental care services from routine dental
+                    cleaning to advanced orthodontics to cover all preventative
+                    and restorative dental practices.
+                  </li>
+                </ul>
+              </Grid>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  mt: 2,
+                  gap: 2,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={closeModal}
+                  style={{ color: "#fff" }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={closeModal}
+                  style={{ marginRight: "5px", color: "black" }}
+                >
+                  Continue
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -207,7 +304,6 @@ function Navbar() {
                     textAlign="center"
                   >
                     Log Out
-               
                   </Typography>
                 </MenuItem>
               </Menu>

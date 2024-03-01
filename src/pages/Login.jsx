@@ -40,7 +40,14 @@ const Login = () => {
       // .catch(() => setErrmessage("Server not found"));
   };
   return (
-    <div>
+    <div style={{ backgroundImage:
+      `url('https://images.unsplash.com/photo-1568301956237-25a54f5f0d21?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFjayUyMGdyb3VuZHxlbnwwfHwwfHx8MA%3D%3D')`,
+       backgroundSize: 'cover',
+        backgroundPosition: 'center',
+         minHeight: '100vh',
+          display: 'flex',
+           justifyContent: 'center',
+            alignItems: 'center' }}> 
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="mt-9 flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

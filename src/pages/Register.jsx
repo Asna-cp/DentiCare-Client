@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { userSchema } from "../Validation/userValidation";
+import bgImage from '../assets/images/c2.jpg'
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -42,7 +43,18 @@ const Register = () => {
     }
   }
   return (
-    <div>
+ 
+    <div  style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100vh',
+    padding: '250px', // Adjust padding as needed
+    backgroundImage: `url('https://images.unsplash.com/photo-1634068966032-86ebf26f74c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjZ8fGRlbnRhbCUyMGNsaW5pY3xlbnwwfHwwfHx8MA%3D%3D')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}> 
+
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="mt-9 flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           {/* <a href="#" className="flex items-center mb-6 text-2xl font-semibold
@@ -186,7 +198,10 @@ const Register = () => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+ 
+   
+ 
   );
 };
 
