@@ -18,19 +18,9 @@ import axios from "axios";
 import { useState } from "react";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-// const phoneRegExp =
-//   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
 const AppointmentSchema = yup.object().shape({
   firstName: yup.string().required("required"),
-  // lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  // contact: yup
-  //   .string()
-  //   .matches(phoneRegExp, "Phone number is not valid")
-  //   .required("required"),
-  // address1: yup.string().required("required"),
-  // address2: yup.string().required("required"),
 });
 
 const Booking = () => {
@@ -40,7 +30,7 @@ const Booking = () => {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
-  const handleChange = (event) => {
+  const handleChange1 = (event) => {
     setSelectedDate(event.target.value);
   };
 
@@ -222,20 +212,20 @@ const Booking = () => {
                   </Select>
                   {count > 5 && <p>Slots full</p>}
                 </FormControl>
-                {/* <TextField
-                  fullWidth
-                  variant="filled"
-                  disablePast={true}
+                <TextField
+                  id="date"
+                  label="Select Date"
                   type="date"
-                  label="Date"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.date}
-                  name="date"
-                  error={!!touched.date && !!errors.date}
-                  helperText={touched.date && errors.date}
+                  value={selectedDate} // Use selectedDate state
+                  onChange={handleChange1} // Use handleChange function
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    min: today, // Set minimum date to today's date
+                  }}
                   sx={{ gridColumn: "span 4" }}
-                /> */}
+                />
 
                 <TextField
                   id="date"

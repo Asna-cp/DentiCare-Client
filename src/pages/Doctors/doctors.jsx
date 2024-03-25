@@ -44,10 +44,6 @@ const Doctors = () => {
               <p class="text-gray-700 text-base mb-4">
                 {doctor.specialist} Specialist
               </p>
-              {/* <p class="text-gray-700 text-base mb-4">{doctor.description}</p>
-              <p class="text-gray-700 text-base mb-4">
-                {doctor.experience} Years Experience
-              </p> */}
             </div>
           </div>
         ))}

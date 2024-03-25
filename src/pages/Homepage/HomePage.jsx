@@ -10,7 +10,6 @@ const HomePage = () => {
     <>
       <Navbar />
       <Banner />
-      {/* <Doctors /> */}
       <Cards />
       <Testimonial />
       <Footer />

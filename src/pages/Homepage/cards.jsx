@@ -20,23 +20,6 @@ const Cards = () => {
     <div>
       <h1 className="text-center font-bold text-4xl mt-5"> Doctors </h1>
       <div className="flex justify-center">
-        {/* {doctors?.map((doctor) => (  
-        <div class="rounded-lg shadow-lg mt-5 bg-white max-w-sm">
-          <a href="#!">
-            <img class="rounded-t-lg w-full"
-             src={doctor.image} 
-             alt="" />
-          </a>
-          <div class="p-6">
-            <h5 class="text-gray-900 text-xl font-medium mb-2">
-            {doctor.doctorName}
-            </h5>
-            <p class="text-gray-700 text-base mb-4">
-            {doctor.specialist} 
-            </p>
-          </div>
-        </div>
-      ))} */}
       <div className="rounded-lg shadow-lg mt-5 mx-3 bg-white max-w-sm">
           <a href="#!">
             <img className="rounded-t-lg w-full h-44"
