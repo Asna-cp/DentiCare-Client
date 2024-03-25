@@ -3,24 +3,50 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// const Login = () => {
+//   const navigate = useNavigate();
+//   const [email, setEmail] = useState("");
+//   // const [emailIsValid, setEmailIsValid] = useState(true);
+//   const [password, setPassword] = useState("");
+//   // const [passwordIsValid, setPasswordIsValid] = useState(true);
+//   // const [formIsValid, setFormIsValid] = useState(false);
+//   // const [errMsg, setErrmessage] = useState("");
+//   // useEffect(() => {
+//   //   setEmailIsValid(email.includes("@"));
+//   // }, [email]);
+//   // useEffect(() => {
+//   //   setPasswordIsValid(password.trim().length > 7);
+//   // }, [password]);
+//   // useEffect(() => {
+//   //   setFormIsValid(emailIsValid && passwordIsValid);
+//   // }, [emailIsValid, passwordIsValid]);
+
+//   const submitHandler = (event) => {
+//     event.preventDefault();
+//     axios
+//       .post(`${process.env.REACT_APP_PORT}/login`, { email, password })
+//       .then((response) => {
+//         const result = response.data;
+//         if (result.status) {
+//           localStorage.setItem("token", result.token);
+//           localStorage.setItem("user", result.userName);
+//           toast.success("Registration Successful")
+
+//           navigate("/");
+//         } else {
+//           // setErrmessage(result.error)
+//         }
+//       })
+//       // .catch(() => setErrmessage("Server not found"));
+//   };
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  // const [emailIsValid, setEmailIsValid] = useState(true);
   const [password, setPassword] = useState("");
-  // const [passwordIsValid, setPasswordIsValid] = useState(true);
-  // const [formIsValid, setFormIsValid] = useState(false);
-  // const [errMsg, setErrmessage] = useState("");
-  // useEffect(() => {
-  //   setEmailIsValid(email.includes("@"));
-  // }, [email]);
-  // useEffect(() => {
-  //   setPasswordIsValid(password.trim().length > 7);
-  // }, [password]);
-  // useEffect(() => {
-  //   setFormIsValid(emailIsValid && passwordIsValid);
-  // }, [emailIsValid, passwordIsValid]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -31,23 +57,30 @@ const Login = () => {
         if (result.status) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("user", result.userName);
-
+          toast.success("Login Successful"); // Display success toast
           navigate("/");
         } else {
-          // setErrmessage(result.error)
+          // Handle login failure
         }
       })
-      // .catch(() => setErrmessage("Server not found"));
+      .catch((error) => {
+        // Handle error
+        console.error("Error occurred during login:", error);
+      });
   };
   return (
-    <div style={{ backgroundImage:
+    <div>
+
+      <ToastContainer />
+   
+    {/* <div style={{ backgroundImage:
       `url('https://images.unsplash.com/photo-1568301956237-25a54f5f0d21?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFjayUyMGdyb3VuZHxlbnwwfHwwfHx8MA%3D%3D')`,
        backgroundSize: 'cover',
         backgroundPosition: 'center',
          minHeight: '100vh',
           display: 'flex',
            justifyContent: 'center',
-            alignItems: 'center' }}> 
+            alignItems: 'center' }}>  */}
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="mt-9 flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -114,6 +147,7 @@ const Login = () => {
         </div>
       </section>
     </div>
+    // </div>
   );
 };
 
